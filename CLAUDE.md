@@ -33,6 +33,8 @@ an AI assistant on the owner's instructions; these rules keep that safe and pred
   internal memos, or anything marked internal in the owner's other repositories.
 - No e-mail address in plain text.
 - Keep names, titles and venues consistent with researchmap and ORCID.
+- Analytics: only cookie-free, privacy-friendly services (currently GoatCounter, set in
+  `src/site.ts`). The analytics dashboard stays private. No other third-party scripts.
 - Titles and author lists of presentations stay in the language the presentation was
   given in; do not translate them.
 - New wording for the bio or any prose is proposed to the owner first and committed
