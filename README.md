@@ -4,6 +4,9 @@ Personal homepage of Kenya Otsuka. Built with [Astro](https://astro.build) and
 deployed to GitHub Pages by the workflow in `.github/workflows/deploy.yml`
 (every push to `main` rebuilds and publishes the site).
 
+Working rules for changing this site (branching, review, what may be published) are in
+[`CLAUDE.md`](CLAUDE.md).
+
 ## Where things live
 
 | What to change | File |
@@ -38,7 +41,4 @@ npm run dev       # live preview at http://localhost:4321
 
 ## Rules for content
 
-- Only material that is already public (papers, talks, affiliations, public
-  repositories) goes on this site. No job-search notes, internal memos,
-  reviewing details beyond what is public, or e-mail addresses in plain text.
-- Keep wording consistent with researchmap / ORCID.
+See [`CLAUDE.md`](CLAUDE.md).
