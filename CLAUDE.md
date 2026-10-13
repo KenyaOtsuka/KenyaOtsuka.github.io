@@ -6,9 +6,12 @@ an AI assistant on the owner's instructions; these rules keep that safe and pred
 
 ## Workflow
 
-- `main` is what gets published. Never commit or push to `main` directly.
-- For every change, create a branch from `main`, commit there, push, and open a pull
-  request. The owner reviews and merges. Do not merge without the owner's approval.
+- `main` is what gets published.
+- Changes to site content or appearance (anything under `src/` or `public/`) go on a
+  branch from `main`, pushed, with a pull request. The owner reviews and merges. Do not
+  merge without the owner's approval.
+- Housekeeping that does not change the site (this file, README, workflow config) may be
+  committed to `main` directly, without a pull request.
 - Keep the history clean: commit only wording the owner has already approved in
   conversation. Draft text is proposed in chat, not committed. Intermediate drafts in
   the history would stay visible forever once pushed.
