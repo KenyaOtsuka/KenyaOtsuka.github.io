@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kenyaotsuka.github.io/sitemap-index.xml

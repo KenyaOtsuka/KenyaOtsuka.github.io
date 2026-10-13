@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Section from './Section.astro';
+import PubItem from './PubItem.astro';
+import TalkItem from './TalkItem.astro';
+import { t, site, pick, type Lang } from '../site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t[lang];
+
+const byYearDesc = <T extends { data: { year: number } }>(a: T, b: T) => b.data.year - a.data.year;
+const education = await getCollection('education');
+const pubs = (await getCollection('publications')).sort(byYearDesc);
+const mainPubs = pubs.filter((p) => p.data.type === 'journal' || p.data.type === 'conference');
+const otherPubs = pubs.filter((p) => p.data.type === 'workshop' || p.data.type === 'preprint');
+const talks = (await getCollection('talks')).sort(byYearDesc);
+const awards = (await getCollection('awards')).sort(byYearDesc);
+const software = await getCollection('software');
+---
+<Base lang={lang} path="/cv/" title={s.sections.cv}>
+  <div class="container page-title">
+    <h1>{s.sections.cv}</h1>
+    <p>{s.name} · {s.affiliationLine}</p>
+  </div>
+
+  <Section id="education" label={s.sections.education}>
+    <ul class="rows">
+      {education.map((e) => (
+        <li class="row">
+          <span class="k">{pick(e.data.period, lang)}</span>
+          <span class="v">
+            {pick(e.data.degree, lang)}<br />{pick(e.data.institution, lang)}
+            {e.data.note && <span class="note">{pick(e.data.note, lang)}</span>}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section id="publications" label={s.sections.publications}>
+    {otherPubs.length > 0 && <h3 class="sub-label">{s.sections.pubMain}</h3>}
+    <ul class="entries">{mainPubs.map((p) => <PubItem pub={p} lang={lang} />)}</ul>
+    {otherPubs.length > 0 && (
+      <>
+        <h3 class="sub-label">{s.sections.pubWorkshop}</h3>
+        <ul class="entries">{otherPubs.map((p) => <PubItem pub={p} lang={lang} />)}</ul>
+      </>
+    )}
+  </Section>
+
+  <Section id="talks" label={s.sections.talks} compact>
+    <ul class="entries">{talks.map((tk) => <TalkItem talk={tk} lang={lang} />)}</ul>
+  </Section>
+
+  <Section id="awards" label={s.sections.awards} compact>
+    <ul class="rows">
+      {awards.map((a) => (
+        <li class="row">
+          <span class="k">{a.data.year}</span>
+          <span class="v">{pick(a.data.title, lang)}{a.data.org && <span class="note">{pick(a.data.org, lang)}</span>}</span>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section id="software" label={s.sections.software} compact>
+    <ul class="rows">
+      {software.map((sw) => (
+        <li class="row">
+          <span class="k"><a class="name" href={sw.data.url} rel="noopener">{sw.data.name}</a></span>
+          <span class="v">{pick(sw.data.role, lang)}<span class="note">{pick(sw.data.description, lang)}</span></span>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section id="links" label={s.sections.links} compact>
+    <ul class="rows">
+      <li class="row"><span class="k">researchmap</span><span class="v"><a href={site.researchmap}>researchmap.jp/kenyaotsuka</a></span></li>
+      <li class="row"><span class="k">ORCID</span><span class="v"><a href={site.orcid}>{site.orcidId}</a></span></li>
+      <li class="row"><span class="k">GitHub</span><span class="v"><a href={site.github}>github.com/KenyaOtsuka</a></span></li>
+      {site.linkedin && <li class="row"><span class="k">LinkedIn</span><span class="v"><a href={site.linkedin}>{site.linkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a></span></li>}
+    </ul>
+  </Section>
+</Base>

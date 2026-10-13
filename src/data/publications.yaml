@@ -1,0 +1,32 @@
+- id: otsuka2026odc
+  type: journal
+  short: TMLR
+  selected: true
+  year: 2026
+  title:
+    en: "Overcoming Output Dimension Collapse: When Sparsity Enables Zero-shot Brain-to-image Reconstruction at Small Data Scales"
+  authors: ["Kenya Otsuka", "Yoshihiro Nagano", "Yukiyasu Kamitani"]
+  venue:
+    en: "Transactions on Machine Learning Research (TMLR)"
+  links:
+    - label: arXiv
+      url: https://arxiv.org/abs/2509.15832
+    - label: OpenReview
+      url: https://openreview.net/forum?id=RQiXUK4kQr
+    - label: Code
+      url: https://github.com/KamitaniLab/OvercomingOutputDimensionCollapse
+
+- id: otsuka2026bbfm
+  type: workshop
+  short: BrainBodyFM
+  selected: true
+  year: 2026
+  title:
+    en: "Training-Target Spectra Induce Graded Shrinkage in Brain Decoder Predictions"
+  authors: ["Kenya Otsuka", "Yoshihiro Nagano", "Yukiyasu Kamitani"]
+  venue:
+    en: "BrainBodyFM 2026 Workshop"
+  note:
+    en: "Accepted; presentation format to be announced."
+    ja: "採択済み。発表形式は未定。"
+  links: []

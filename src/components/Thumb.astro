@@ -1,0 +1,9 @@
+---
+interface Props { image?: string; label?: string; alt?: string }
+const { image, label, alt = '' } = Astro.props;
+---
+{image ? (
+  <img class="thumb" src={image} alt={alt} loading="lazy" width="240" height="180" />
+) : (
+  <div class="thumb thumb-placeholder" aria-hidden="true"><span>{label}</span></div>
+)}

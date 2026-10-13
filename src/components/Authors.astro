@@ -1,0 +1,12 @@
+---
+import { site, type Lang } from '../site';
+interface Props { authors: readonly string[]; authorsJa?: readonly string[]; lang: Lang }
+const { authors, authorsJa, lang } = Astro.props;
+const list = lang === 'ja' && authorsJa && authorsJa.length > 0 ? authorsJa : authors;
+const isJa = /[\u3040-\u30ff\u4e00-\u9fff]/.test(list.join(''));
+const me = isJa ? site.highlightAuthorJa : site.highlightAuthor;
+const sep = (i: number) => (isJa ? '、' : i === list.length - 1 ? ', and ' : ', ');
+---
+<span class="authors" lang={isJa ? 'ja' : 'en'}>{list.map((a, i) => (
+  <>{i > 0 && sep(i)}{a === me ? <span class="me">{a}</span> : a}</>
+))}</span>

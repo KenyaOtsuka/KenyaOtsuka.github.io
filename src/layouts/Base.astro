@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+import { t, site, href, type Lang } from '../site';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  path: string; // language-neutral path, e.g. "/" or "/cv/"
+}
+const { lang, title, description, path } = Astro.props;
+const s = t[lang];
+const pageTitle = title ? `${title} · ${s.name}` : `${s.name} — ${s.role}`;
+const canonical = new URL(href(lang, path), site.url).toString();
+const alt = { en: new URL(href('en', path), site.url).toString(), ja: new URL(href('ja', path), site.url).toString() };
+const fonts =
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap';
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description ?? s.description} />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={alt.en} />
+    <link rel="alternate" hreflang="ja" href={alt.ja} />
+    <link rel="alternate" hreflang="x-default" href={alt.en} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description ?? s.description} />
+    <meta property="og:url" content={canonical} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={fonts} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Kenya Otsuka',
+      alternateName: '大塚健矢',
+      url: site.url,
+      affiliation: { '@type': 'Organization', name: 'Kyoto University' },
+      sameAs: [site.github, site.researchmap, site.orcid, ...(site.linkedin ? [site.linkedin] : [])],
+    })} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href={href(lang, '/')} lang={lang}>{s.name}</a>
+        <nav class="nav" aria-label="Main">
+          <a class="anchor" href={href(lang, '/') + '#publications'}>{s.nav.publications}</a>
+          <a class="anchor" href={href(lang, '/') + '#talks'}>{s.nav.talks}</a>
+          <a href={href(lang, '/cv/')}>{s.nav.cv}</a>
+          <a class="lang" href={lang === 'ja' ? href('en', path) : href('ja', path)} lang={lang === 'ja' ? 'en' : 'ja'}>{s.langSwitch.label}</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <span>{s.footer.replace('{year}', String(year))}</span>
+        <span>
+          <a href={site.github}>GitHub</a> · <a href={site.researchmap}>researchmap</a> · <a href={site.orcid}>ORCID</a>{site.linkedin && <> · <a href={site.linkedin}>LinkedIn</a></>}
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

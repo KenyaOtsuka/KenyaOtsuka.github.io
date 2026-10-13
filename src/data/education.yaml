@@ -1,0 +1,38 @@
+- id: phd
+  period:
+    en: "2025 – present"
+    ja: "2025年4月 – 現在"
+  degree:
+    en: "Ph.D. student, Intelligence Science and Technology"
+    ja: "博士後期課程 知能情報学コース"
+  institution:
+    en: "Graduate School of Informatics, Kyoto University"
+    ja: "京都大学大学院 情報学研究科 情報学専攻"
+  note:
+    en: "Kamitani Lab (advisor: Prof. Yukiyasu Kamitani). Research intern at ATR. Expected completion: March 2028."
+    ja: "神谷研究室（指導教員: 神谷之康 教授）。ATR 連携実習生。2028年3月修了見込み。"
+
+- id: master
+  period:
+    en: "2023 – 2025"
+    ja: "2023年4月 – 2025年3月"
+  degree:
+    en: "M.Inf. (Master of Informatics)"
+    ja: "修士（情報学）"
+  institution:
+    en: "Graduate School of Informatics, Kyoto University"
+    ja: "京都大学大学院 情報学研究科"
+  note:
+    en: "Kamitani Lab."
+    ja: "神谷研究室。"
+
+- id: bachelor
+  period:
+    en: "2019 – 2023"
+    ja: "2019年4月 – 2023年3月"
+  degree:
+    en: "B.Eng., Informatics and Mathematical Science"
+    ja: "学士（工学）"
+  institution:
+    en: "Faculty of Engineering, Kyoto University"
+    ja: "京都大学 工学部 情報学科"

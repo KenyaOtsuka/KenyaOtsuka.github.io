@@ -1,0 +1,10 @@
+---
+interface Props { id: string; label: string; compact?: boolean }
+const { id, label, compact = false } = Astro.props;
+---
+<section class:list={['section', { 'section-compact': compact }]} id={id} aria-labelledby={`${id}-label`}>
+  <div class="container section-grid">
+    <h2 class="section-label" id={`${id}-label`}>{label}</h2>
+    <div class="section-body"><slot /></div>
+  </div>
+</section>

@@ -1,0 +1,19 @@
+- id: bdpy
+  name: bdpy
+  url: https://github.com/KamitaniLab/bdpy
+  role:
+    en: "Contributor"
+    ja: "開発に参加"
+  description:
+    en: "Python toolkit for brain decoding from the Kamitani Lab."
+    ja: "神谷研究室の脳情報デコーディング用 Python パッケージ。"
+
+- id: pyfastl2lir
+  name: PyFastL2LiR
+  url: https://github.com/KamitaniLab/PyFastL2LiR
+  role:
+    en: "Contributor"
+    ja: "開発に参加"
+  description:
+    en: "Fast L2-regularised linear regression with feature selection."
+    ja: "特徴選択付きの高速 L2 正則化線形回帰。"

@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Section from './Section.astro';
+import PubItem from './PubItem.astro';
+import TalkItem from './TalkItem.astro';
+import Icon from './Icon.astro';
+import { t, site, href, pick, type Lang } from '../site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t[lang];
+
+const byYearDesc = <T extends { data: { year: number } }>(a: T, b: T) => b.data.year - a.data.year;
+const pubs = (await getCollection('publications')).sort(byYearDesc);
+const mainPubs = pubs.filter((p) => p.data.type === 'journal' || p.data.type === 'conference');
+const otherPubs = pubs.filter((p) => p.data.type === 'workshop' || p.data.type === 'preprint');
+const talks = (await getCollection('talks')).sort(byYearDesc);
+const awards = (await getCollection('awards')).sort(byYearDesc);
+---
+<Base lang={lang} path="/">
+  <section class="hero" id="about">
+    <div class:list={['container', 'hero-grid', { 'has-photo': !!s.photo }]}>
+      {s.photo && <img class="photo" src={s.photo} alt={s.name} width="200" height="200" />}
+      <div class="hero-text">
+        <h1>{s.name}<span class="alt-name" lang={lang === 'ja' ? 'en' : 'ja'}>{s.nameSub}</span></h1>
+        <p class="role">{s.role} · {s.affiliation}</p>
+        {s.bio.map((para) => <p class="bio">{para}</p>)}
+        <div class="btns">
+          <a class="btn" href={site.github} rel="me"><Icon name="github" />GitHub</a>
+          <a class="btn" href={site.researchmap} rel="me"><Icon name="link" />researchmap</a>
+          <a class="btn" href={site.orcid} rel="me"><Icon name="orcid" />ORCID</a>
+        {site.linkedin && <a class="btn" href={site.linkedin} rel="me"><Icon name="linkedin" />LinkedIn</a>}
+          <a class="btn ghost" href={href(lang, '/cv/')}><Icon name="doc" />{s.buttons.cv}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Section id="publications" label={s.sections.publications}>
+    {otherPubs.length > 0 && <h3 class="sub-label">{s.sections.pubMain}</h3>}
+    <ul class="entries">
+      {mainPubs.map((p) => <PubItem pub={p} lang={lang} />)}
+    </ul>
+    {otherPubs.length > 0 && (
+      <>
+        <h3 class="sub-label">{s.sections.pubWorkshop}</h3>
+        <ul class="entries">
+          {otherPubs.map((p) => <PubItem pub={p} lang={lang} />)}
+        </ul>
+      </>
+    )}
+  </Section>
+
+  <Section id="talks" label={s.sections.talks} compact>
+    <ul class="entries">
+      {talks.map((tk) => <TalkItem talk={tk} lang={lang} />)}
+    </ul>
+  </Section>
+
+  <Section id="awards" label={s.sections.awards} compact>
+    <ul class="rows">
+      {awards.map((a) => (
+        <li class="row">
+          <span class="k">{a.data.year}</span>
+          <span class="v">{pick(a.data.title, lang)}{a.data.org && <span class="note">{pick(a.data.org, lang)}</span>}</span>
+        </li>
+      ))}
+    </ul>
+  </Section>
+</Base>

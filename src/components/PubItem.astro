@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { pick, type Lang } from '../site';
+import Authors from './Authors.astro';
+import Icon from './Icon.astro';
+import Thumb from './Thumb.astro';
+
+interface Props { pub: CollectionEntry<'publications'>; lang: Lang }
+const { pub, lang } = Astro.props;
+const d = pub.data;
+const iconFor = (label: string) => (/code|github/i.test(label) ? 'github' : /paper|openreview|arxiv|pdf|doi/i.test(label) ? 'doc' : 'link');
+---
+<li class="entry">
+  <Thumb image={d.image} label={d.short ?? String(d.year)} alt={pick(d.title, lang)} />
+  <div class="entry-main">
+    <h3 class="title" lang="en">{pick(d.title, lang)}</h3>
+    <div class="authors"><Authors authors={d.authors} authorsJa={d.authors_ja} lang={lang} /></div>
+    <div class="venue">{pick(d.venue, lang)}, {d.year}{d.note && <span class="note"> · {pick(d.note, lang)}</span>}</div>
+    {d.links.length > 0 && (
+      <div class="btns">
+        {d.links.map((l) => (
+          <a class="btn sm ghost" href={l.url} rel="noopener"><Icon name={iconFor(l.label)} size={14} />{l.label}</a>
+        ))}
+      </div>
+    )}
+  </div>
+</li>

@@ -1,0 +1,28 @@
+- id: jnns2024
+  year: 2024
+  short: JNNS
+  date:
+    en: "Sep 2024"
+    ja: "2024年9月"
+  format: oral
+  title: "知覚像再構成において訓練データ数が高次元特徴量の予測に与える影響"
+  authors: ["大塚健矢", "神谷之康", "長野祥大"]
+  event:
+    en: "The 34th Annual Conference of the Japanese Neural Network Society (JNNS 2024)"
+    ja: "日本神経回路学会 第34回全国大会（JNNS 2024）"
+  note:
+    en: "Peer-reviewed"
+    ja: "査読あり"
+
+- id: kyoto-ist-2024
+  year: 2024
+  short: IST
+  date:
+    en: "Dec 2024"
+    ja: "2024年12月"
+  format: poster
+  title: "脳活動からの知覚像再構成における精度限界の数理的検討"
+  authors: ["大塚健矢", "神谷之康", "長野祥大"]
+  event:
+    en: "Autumn Symposium on Intelligence Science and Technology 2024, Graduate School of Informatics, Kyoto University"
+    ja: "2024年度 京都大学 情報学研究科 秋の知能情報学シンポジウム"

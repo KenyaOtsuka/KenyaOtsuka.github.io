@@ -1,0 +1,13 @@
+- id: kyoto-nextgen-ai-2025
+  year: 2025
+  kind: grant
+  title:
+    en: "Selected for the Kyoto University Next-Generation AI Program"
+    ja: "京都大学 次世代AIプログラム 採択"
+
+- id: neurips2026-top-reviewer
+  year: 2026
+  kind: service
+  title:
+    en: "Top Reviewer, NeurIPS 2026"
+    ja: "NeurIPS 2026 Top Reviewer"

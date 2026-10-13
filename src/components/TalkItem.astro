@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { pick, type Lang } from '../site';
+import Authors from './Authors.astro';
+
+interface Props { talk: CollectionEntry<'talks'>; lang: Lang }
+const { talk, lang } = Astro.props;
+const d = talk.data;
+const jaTitle = /[\u3040-\u30ff\u4e00-\u9fff]/.test(d.title);
+const fmt: Record<string, { en: string; ja: string }> = {
+  oral: { en: 'Oral', ja: '口頭発表' },
+  poster: { en: 'Poster', ja: 'ポスター発表' },
+  invited: { en: 'Invited talk', ja: '招待講演' },
+};
+---
+<li class="entry entry-compact">
+  <div class="entry-year">{d.year}</div>
+  <div class="entry-main">
+    <h3 class="title" lang={jaTitle ? 'ja' : 'en'}>{d.title}</h3>
+    <div class="authors"><Authors authors={d.authors} lang={lang} /></div>
+    <div class="venue">
+      <span class="badge">{fmt[d.format][lang]}</span>
+      {pick(d.event, lang)}{lang === 'ja' ? '、' : ', '}{pick(d.date, lang)}{d.note && <span class="note"> · {pick(d.note, lang)}</span>}
+    </div>
+    {d.links.length > 0 && (
+      <div class="btns">{d.links.map((l) => <a class="btn sm ghost" href={l.url} rel="noopener">{l.label}</a>)}</div>
+    )}
+  </div>
+</li>
