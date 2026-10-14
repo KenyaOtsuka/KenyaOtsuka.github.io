@@ -31,6 +31,11 @@ so the name is highlighted in author lists.
 - `/` English home, `/cv/` English CV
 - `/ja/` Japanese home, `/ja/cv/` Japanese CV
 
+## Link preview image
+
+`public/og.png` (1200x630) is what LinkedIn, Slack and similar show when the URL is shared.
+Edit `scripts/og-template.html` and run `node scripts/og.mjs` (needs Playwright) to regenerate it.
+
 ## Local commands
 
 ```sh

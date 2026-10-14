@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500&display=swap" />
+<style>
+  html, body { margin: 0; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: #ffffff; color: #0f1219;
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    position: relative;
+  }
+  .glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(900px 420px at 15% -10%, rgba(47, 91, 234, 0.14), transparent 70%);
+  }
+  .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 14px; background: #2f5bea; }
+  .wrap { position: absolute; left: 96px; top: 118px; right: 96px; }
+  .site { font-size: 26px; font-weight: 500; color: #6b7280; letter-spacing: 0.01em; }
+  h1 { margin: 22px 0 0; font-size: 96px; font-weight: 700; letter-spacing: -0.035em; line-height: 1; }
+  .ja { font-family: 'Noto Sans JP', sans-serif; font-size: 40px; color: #6b7280; margin-top: 14px; font-weight: 500; }
+  .role { margin-top: 44px; font-size: 32px; color: #3f4552; font-weight: 500; }
+  .topics { margin-top: 18px; font-size: 28px; color: #6b7280; }
+  .topics span + span::before { content: '·'; margin: 0 14px; color: #c3c8d3; }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="bar"></div>
+  <div class="wrap">
+    <div class="site">kenyaotsuka.github.io</div>
+    <h1>Kenya Otsuka</h1>
+    <div class="ja">大塚 健矢</div>
+    <div class="role">Ph.D. student, Kamitani Lab · Kyoto University</div>
+    <div class="topics"><span>Brain decoding</span><span>Brain-to-image reconstruction</span><span>Machine learning</span></div>
+  </div>
+</body>
+</html>

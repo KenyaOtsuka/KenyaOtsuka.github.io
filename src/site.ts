@@ -11,6 +11,8 @@ export const site = {
   orcidId: '0009-0005-5714-7040',
   linkedin: 'https://jp.linkedin.com/in/kenya-otsuka', // empty hides the button
   goatcounter: 'https://kenyaotsuka.goatcounter.com/count', // privacy-friendly page-view counter; empty disables
+  ogImage: '/og.png', // 1200x630 preview card for link shares; regenerate with `node scripts/og.mjs`
+  googleSiteVerification: 'ZqvGYc1IS2qf40o8MRWzQ4PhC7M6ART4UUfPv3ardoc', // Google Search Console 'HTML tag' content value; empty omits the tag
   highlightAuthor: 'Kenya Otsuka',
   highlightAuthorJa: '大塚健矢',
 };
