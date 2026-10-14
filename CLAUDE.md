@@ -53,6 +53,8 @@ an AI assistant on the owner's instructions; these rules keep that safe and pred
 | Colours, fonts, spacing | `src/styles/global.css` |
 | Page structure | `src/components/Home.astro`, `src/components/CV.astro`, `src/layouts/Base.astro` |
 | Field definitions and validation | `src/content.config.ts` |
+| Link-preview image (OG image) | `public/og.png`, generated from `scripts/og-template.html` by `node scripts/og.mjs` |
+| Analytics id, OG image path, Search Console tag | `src/site.ts` (`site` object) |
 
 Text fields in the YAML files are bilingual: `en` is required, `ja` is optional and
 falls back to `en`. The build fails on a field that does not match the schema.
