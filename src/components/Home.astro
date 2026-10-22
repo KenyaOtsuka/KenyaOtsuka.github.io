@@ -16,7 +16,8 @@ const pubs = (await getCollection('publications')).sort(byYearDesc);
 const mainPubs = pubs.filter((p) => p.data.type === 'journal' || p.data.type === 'conference');
 const otherPubs = pubs.filter((p) => p.data.type === 'workshop' || p.data.type === 'preprint');
 const talks = (await getCollection('talks')).sort(byYearDesc);
-const awards = (await getCollection('awards')).sort(byYearDesc);
+const kindOrder = { grant: 0, award: 1, service: 2 } as const;
+const awards = (await getCollection('awards')).sort((a, b) => kindOrder[a.data.kind] - kindOrder[b.data.kind] || b.data.year - a.data.year);
 ---
 <Base lang={lang} path="/">
   <section class="hero" id="about">
@@ -59,13 +60,10 @@ const awards = (await getCollection('awards')).sort(byYearDesc);
   </Section>
 
   <Section id="awards" label={s.sections.awards} compact>
-    <ul class="rows">
-      {awards.map((a) => (
-        <li class="row">
-          <span class="k">{a.data.year}</span>
-          <span class="v">{pick(a.data.title, lang)}{a.data.org && <span class="note">{pick(a.data.org, lang)}</span>}</span>
-        </li>
+    <p class="inline-list">
+      {awards.map((a, i) => (
+        <>{i > 0 && <span class="sep" aria-hidden="true">·</span>}<span>{pick(a.data.title, lang)}</span></>
       ))}
-    </ul>
+    </p>
   </Section>
 </Base>

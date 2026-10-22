@@ -16,7 +16,8 @@ const pubs = (await getCollection('publications')).sort(byYearDesc);
 const mainPubs = pubs.filter((p) => p.data.type === 'journal' || p.data.type === 'conference');
 const otherPubs = pubs.filter((p) => p.data.type === 'workshop' || p.data.type === 'preprint');
 const talks = (await getCollection('talks')).sort(byYearDesc);
-const awards = (await getCollection('awards')).sort(byYearDesc);
+const kindOrder = { grant: 0, award: 1, service: 2 } as const;
+const awards = (await getCollection('awards')).sort((a, b) => kindOrder[a.data.kind] - kindOrder[b.data.kind] || b.data.year - a.data.year);
 const software = await getCollection('software');
 ---
 <Base lang={lang} path="/cv/" title={s.sections.cv}>
